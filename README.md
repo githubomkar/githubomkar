@@ -234,7 +234,7 @@ Enter the value of rx and ry 50 65
 
 
 Experiment no: 5a
-a)	Boundary Fill Program:
+a)	Flood Fill Program:
 
 #include<stdio.h>
 #include<graphics.h>
@@ -279,7 +279,7 @@ student@complab:~/Desktop/parasss$ ./exp5a
 	
 
 Experiment no: 5b
-b)	Flood Fill Program
+b)	Boundary Fill Program
 
 #include<stdio.h>
 #include<graphics.h>
