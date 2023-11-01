@@ -1,829 +1,90 @@
-Experiment No. 1
-Aim: Implementation of stack using Array
+Exp.No.1: DDA algorithm:
 
 #include<stdio.h>
-int stack[100],choice,max,top,data,i;
-
-int main()
-{
-    //clrscr();
-    top=-1;
-    printf("\n Enter the size of STACK[MAX=100]:");
-    scanf("%d",&max);
-    printf("\n\t STACK OPERATIONS USING ARRAY");
-    printf("\n\t--------------------------------");
-    printf("\n\t 1.PUSH\n\t 2.POP\n\t 3.DISPLAY\n\t 4.EXIT");
-    do
-    {
-        printf("\n Enter the Choice:");
-        scanf("%d",&choice);
-        switch(choice)
-        {
-            case 1:
-            {
-                if(top>=max-1)
-    {
-        printf("\n\tSTACK is over flow");
-        
-    }
-    else
-    {
-        printf(" Enter a value to be pushed:");
-        scanf("%d",&data);
-        top++;
-        stack[top]=data;
-    }
-                break;
-            }
-            case 2:
-            {
-                if(top<=-1)
-    {
-        printf("\n\t Stack is under flow");
-    }
-    else
-    {
-        printf("\n\t The popped elements is %d",stack[top]);
-        top--;
-    }
-                break;
-            }
-            case 3:
-            {
-               if(top>=0)
-    {
-        printf("\n The elements in STACK \n");
-        for(i=top; i>=0; i--)
-            printf("\n%d",stack[i]);
-        printf("\n Press Next Choice");
-    }
-    else
-    {
-        printf("\n The STACK is empty");
-    }
-                break;
-            }
-            case 4:
-            {
-                printf("\n\t EXIT POINT ");
-                break;
-            }
-            default:
-            {
-                printf ("\n\t Please Enter a Valid Choice(1/2/3/4)");
-            }
-                
-        }
-    }
-    while(choice!=4);
-    return 0;
-}
-
-EXPERIMENT NO-2
-IMPLEMENTATION OF LINEAR QUEUE USING ARRAY
-
-#include<stdio.h>
-#define n 5
-int main()
-{
-    int queue[n],ch=1,front=0,rear=0,i,j=1,x=n;
-    printf("Queue using Array");
-    printf("\n1.Insertion \n2.Deletion \n3.Display \n4.Exit");
-    while(ch)
-    {
-        printf("\nEnter the Choice:");
-        scanf("%d",&ch);
-        switch(ch)
-        {
-        case 1:
-            if(rear==x)
-                printf("\n Queue is Full");
-            else
-            {
-                printf("\n Enter no %d:",j++);
-                scanf("%d",&queue[rear++]);
-            }
-            break;
-        case 2:
-            if(front==rear)
-            {
-                printf("\n Queue is empty");
-            }
-            else
-            {
-                printf("\n Deleted Element is %d",queue[front++]);
-                x++;
-            }
-            break;
-        case 3:
-            printf("\nQueue Elements are:\n ");
-            if(front==rear)
-                printf("\n Queue is Empty");
-            else
-            {
-                for(i=front; i<rear; i++)
-                {
-                    printf("%d",queue[i]);
-                    printf("\n");
-                }
-                break;
-            case 4:
-                exit(0);
-            default:
-                printf("Wrong Choice: please see the options");
-            }
-        }
-    }
-    return 0;
-}
-OUTPUT:
-
-
-EXPERIMENT No. 3
-PROGRAM TO CONVERT INFIX TO POSTFIX EXPRESSION
-#include<stdio.h>
-#include<stdlib.h>
-#include<ctype.h>
-char stack[50];
-int top = -1;
-void push(char x)
-{
-    stack[++top] = x;
-}
-char pop()
-{
-    if(top == -1)
-        return -1;
-    else
-        return stack[top--];
-}
-int priority(char x)
-{
-    if(x == '(')
-        return 0;
-    if(x == '+' || x == '-')
-        return 1;
-    if(x == '*' || x == '/')
-        return 2;
-    return 0;
-}
-
-int main()
-{
-    char exp[100];
-    char *e, x;
-    printf("Enter the expression : ");
-    scanf("%s",exp);
-    printf("\n");
-    e = exp;
-    
-    while(*e != '\0')
-    {
-        if(isalnum(*e))
-            printf("%c ",*e);
-        else if(*e == '(')
-            push(*e);
-        else if(*e == ')')
-        {
-            while((x = pop()) != '(')
-                printf("%c ", x);
-        }
-        else
-        {
-            while(priority(stack[top]) >= priority(*e))
-                printf("%c ",pop());
-            push(*e);
-        }
-        e++;
-    }
-    
-    while(top != -1)
-    {
-        printf("%c ",pop());
-    }return 0;
-}
-
-
-
-
-
-OUTPUT:
-
-EXPERIMENT No. 4
-PROGRAM TO EVALUATE POSTFIX EXPRESSION
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<math.h>
-#define SIZE 100
-int top=-1;
-int stack[SIZE];
-void push(int item);
-int pop();
-int is_operator(char symbol);
-void posteval(char *);
+#include<graphics.h>
 void main()
 {
-    char postfix_exp[SIZE];
-    int item;
-    printf("\nEnter the arithmetic expression in Postfix notation:\n");
-    gets(postfix_exp);
-    posteval(postfix_exp);
-}
-void posteval(char postfix_exp[SIZE])
+float x,y,xinc,yinc,x1,y1,x2,y2,dx,dy,step;
+int i, gd=DETECT, gm;
+printf("Enter the value of s1 and y1:");
+scanf("%f %f",&x1,&y1);
+printf("Enter the value ofx2 and y2:");
+scanf("%f %f", &x2,&y2);
+initgraph(&gd,&gm,NULL);
+dx=abs(x2-x1);
+dy=abs(y2*y1);
+if(dx>=dy)
+step=dx;
+else
+step=dy;
+xinc=dx/step;
+yinc=dy/step;
+for(i=1;i<=step;i++)
 {
-    int i, j;
-    int x, y, result, value;
-    j=0;
-    for(i=0; postfix_exp [i]!='\0';i++)
-    {
-        if (isdigit (postfix_exp[i]) )
-        {
-            push (postfix_exp[i]-48);
-        }
-        else if(is_operator(postfix_exp[i]))
-        {
-           y = pop();
-           x = pop();
-           switch (postfix_exp[i])
-           {
-              case '+':
-                       result = x + y;
-                       break;
-              case '-':
-                       result = x - y;
-                       break;
-              case '*':
-                       result = x * y;
-                       break;
-              case '/':
-                       result = x / y;
-                       break;
-              case '^':
-                       result = pow(x,y);
-                       break;
-            }
-            push(result);
-        }
-        else
-        {
-            printf("\nInvalid postfix expression\n");
-            exit(0);
-        }
-    }
-    value=pop();
-    printf("\nValue of the postfix expression is %d", value);
+putpixel(x,y,5);
+x=x+xinc;
+y=y+yinc;
+delay(1000);
 }
-void push(int item)
-{
-    if(top==SIZE-1)
-    {
-        printf("\nStack Full");
-    }
-    else
-    {
-        top=top+1;
-        stack[top]=item;
-    }
+closegraph();
 }
-int pop()
+Output:
+student@complab:~$ cd /home/student/Desktop/parasss
+student@complab:~/Desktop/parasss$ gcc exp1.c -o exp1 -lgraph
+student@complab:~/Desktop/parasss$ ./exp1
+Enter the value of s1 and y1:600 900
+Enter the value ofx2 and y2:1000 800
+
+
+
+
+
+	
+
+
+
+
+Exp. No.2: Bresenham’s Line drawing Program
+
+#include<stdio.h>
+#include<graphics.h>
+void main()
 {
-    int item;
-    if(top==-1)
-    {
-        printf("\nStack Empty");
-    }
-    else
-    {
-        item=stack[top];
-        top=top-1;
-    }
-    return(item);
+int gd=DETECT, gm, x2,y2,x1,y1;
+int dx,dy,p,i;
+printf("Enter co-ordinate of start point:");
+scanf("%d %d",&x1,&y1);
+printf("Enter co-ordinate of end point:");
+scanf("%d %d",&x2,&y2);
+initgraph(&gd,&gm,NULL);
+dx=x2-x1;
+dy=y2-y1;
+p=2*dy-dx;
+for(i=1;i<dx;i++)
+{
+if(p>=0)
+{
+putpixel(x1,y1,7);
+y1=y1+1;
+p-p+2*dy-2*dx;
 }
-int is_operator(char symbol)
+else
 {
-    if(symbol=='^'||symbol=='*'||symbol=='/'||symbol=='+'||symbol=='-')
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+putpixel(x1,y1,7);
+p=p+2*dy;
 }
-
-OUTPUT:
-
-
-Exp No. 6
-To implement Singly linked list
-
-#include<stdio.h>  
-#include<stdlib.h>  
-struct node   
-{  
-    int data;  
-    struct node *next;   
-};  
-struct node *head;  
-  
-void beginsert ();   
-void lastinsert ();  
-void randominsert();  
-void begin_delete();  
-void last_delete();  
-void random_delete();  
-void display();  
-void search();  
-void main ()  
-{  
-    int choice =0;  
-    while(choice != 9)   
-    {  
-        printf("\n\n*********Main Menu*********\n");  
-        printf("\nChoose one option from the following list ...\n");  
-        printf("\n===============================================\n");  
-        printf("\n1.Insert in begining\n2.Insert at last\n3.Insert at any random location\n4.Delete from Beginning\n 5.Delete from last\n6.Delete node after specified location\n7.Search for an element\n8.Show\n9.Exit\n");  
-        printf("\nEnter your choice?\n");         
-        scanf("\n %d",&choice);  
-        switch(choice)  
-        {  
-            case 1:  
-            beginsert();      
-            break;  
-            case 2:  
-            lastinsert();         
-            break;  
-            case 3:  
-            randominsert();       
-            break;  
-            case 4:  
-            begin_delete();       
-            break;  
-            case 5:  
-            last_delete();        
-            break;  
-            case 6:  
-            random_delete();          
-            break;  
-          /*  case 7:  
-            search();         
-            break;  */
-            case 8:  
-            display();        
-            break;  
-            case 9:  
-            exit(0);  
-            break;  
-            default:  
-            printf("Please enter valid choice..");  
-        }  
-    }  
-}  
-void beginsert()  
-{  
-    struct node *newnode;  
-    int item;  
-    newnode = (struct node *) malloc(sizeof(struct node *));  
-    if(newnode == NULL)  
-    {  
-        printf("\nOVERFLOW");  
-    }  
-    else  
-    {  
-        printf("\nEnter value\n");    
-        scanf("%d",&item);    
-        newnode->data = item;  
-        newnode->next = head;  
-        head = newnode;  
-        printf("\nNode inserted");  
-    }  
-      
-}  
-void lastinsert()  
-{  
-    struct node *newnode,*temp;  
-    int item;     
-    newnode = (struct node*)malloc(sizeof(struct node));      
-    if(newnode == NULL)  
-    {  
-        printf("\nOVERFLOW");     
-    }  
-    else  
-    {  
-        printf("\nEnter value?\n");  
-        scanf("%d",&item);  
-        newnode->data = item;  
-        if(head == NULL)  
-        {  
-            newnode -> next = NULL;  
-            head = newnode;  
-            printf("\nNode inserted");  
-        }  
-        else  
-        {  
-            temp = head;  
-            while (temp -> next != NULL)  
-            {  
-                temp = temp -> next;  
-            }  
-            temp->next = newnode;  
-            newnode->next = NULL;  
-            printf("\nNode inserted");  
-          
-        }  
-    }  
-}  
-void randominsert()  
-{  
-    int i,loc,item;   
-    struct node *newnode, *temp;  
-    newnode = (struct node *) malloc (sizeof(struct node));  
-    if(newnode == NULL)  
-    {  
-        printf("\nOVERFLOW");  
-    }  
-    else  
-    {  
-        printf("\nEnter element value");  
-        scanf("%d",&item);  
-        newnode->data = item;  
-        printf("\nEnter the location after which you want to insert ");  
-        scanf("\n%d",&loc);  
-        temp=head;  
-        for(i=0;i<loc;i++)  
-        {  
-            temp = temp->next;  
-            if(temp == NULL)  
-            {  
-                printf("\ncan't insert\n");  
-                return;  
-            }  
-          
-        }  
-        newnode ->next = temp ->next;   
-        temp ->next = newnode;   
-        printf("\nNode inserted");  
-    }  
-}  
-void begin_delete()  
-{  
-    struct node *temp;  
-    if(head == NULL)  
-    {  
-        printf("\nList is empty\n");  
-    }  
-    else   
-    {  
-        temp = head;  
-        head = temp->next;  
-        free(temp);  
-        printf("\nNode deleted from the beginning ...\n");  
-    }  
-}  
-void last_delete()  
-{  
-    struct node *temp1,*temp2;  
-    if(head == NULL)  
-    {  
-        printf("\n list is empty");  
-    }  
-    else if(head -> next == NULL)  
-    {  
-        head = NULL;  
-        free(head);  
-        printf("\nOnly node of the list deleted ...\n");  
-    }  
-          
-    else  
-    {  
-        temp1 = head;   
-        while(temp1->next != NULL)  
-        {  
-            temp2 = temp1;  
-            temp1 = temp1 ->next;  
-        }  
-        temp2->next = NULL;  
-        free(temp1);  
-        printf("\nDeleted Node from the last ...\n");  
-    }     
-}  
-void random_delete()  
-{  
-    struct node *temp1,*temp2;  
-    int loc,i;    
-    printf("\n Enter the location of the node after which you want to perform deletion \n");  
-    scanf("%d",&loc);  
-    temp1=head;  
-    for(i=0;i<loc;i++)  
-    {  
-        temp2 = temp1;       
-        temp1 = temp1->next;  
-              
-        if(temp1 == NULL)  
-        {  
-            printf("\nCan't delete");  
-            return;  
-        }  
-    }  
-    temp2 ->next = temp1 ->next;  
-    free(temp1);  
-    printf("\nDeleted node %d ",loc+1);  
-}  
-
-void display()  
-{  
-    struct node *temp;  
-    temp = head;   
-    if(temp == NULL)  
-    {  
-        printf("Nothing to print");  
-    }  
-    else  
-    {  
-        printf("\nprinting values . . . . .\n");   
-        while (temp!=NULL)  
-        {  
-            printf("\n%d",temp->data);  
-            temp = temp -> next;  
-        }  
-    }  
-}     
-                
-
-
-
-
-EXP No. 7
-
-To implement Circular Linked List
-
-
-#include<stdio.h>  
-#include<stdlib.h>  
-struct node   
-{  
-	int data;  
-	struct node *next;   
-};  
-struct node *head=NULL;  
- 
-void beginsert ();   
-void lastinsert ();  
-void randominsert();  
-void begin_delete();  
-void last_delete();  
-void random_delete();  
-void display();  
-void search();  
-void main ()  
-{  
-	int choice =0;  
-	while(choice != 9)   
-	{  
-    	printf("\n\n*********Main Menu*********\n");  
-    	printf("\nChoose one option from the following list ...\n");  
-    	printf("\n===============================================\n");  
-    	printf("\n1.Insert in begining\n2.Insert at last\n3.Insert at any random location\n4.Delete from Beginning\n 5.Delete from last\n6.Delete node after specified location\n7.Search for an element\n8.Show\n9.Exit\n");  
-    	printf("\nEnter your choice?\n");    	 
-    	scanf("\n %d",&choice);  
-    	switch(choice)  
-    	{  
-        	case 1:  
-        	beginsert(); 	 
-        	break;  
-        	case 2:  
-        	lastinsert();    	 
-        	break;  
-        	case 3:  
-        	randominsert();  	 
-        	break;  
-        	case 4:  
-        	begin_delete();  	 
-        	break;  
-        	case 5:  
-        	last_delete();   	 
-        	break;  
-        	case 6:  
-        	random_delete();     	 
-        	break;  
-      	/*  case 7:  
-        	search();    	 
-        	break;  */
-        	case 8:  
-        	display();   	 
-        	break;  
-        	case 9:  
-        	exit(0);  
-        	break;  
-        	default:  
-        	printf("Please enter valid choice..");  
-    	}  
-	}  
-}  
-void beginsert()  
-{  
-	struct node *newnode, *temp;  
-	int item;  
-	newnode = (struct node *) malloc(sizeof(struct node *));  
-  /* if(newnode == NULL)  
-	{  
-    	printf("\nOVERFLOW");  
-	}
-	else  
-	{ */
-	printf("\nEnter value\n");    
-	scanf("%d",&item);    
-	newnode->data = item;
- 	if(head==NULL)
-	{
-	head=newnode;
-	newnode->next=head;
-	printf("\nNode inserted");  
-	}
-	else
-	{  
-   	 
-    	temp=head;
-    	while(temp->next!=head)
-    	{
-    	temp=temp->next;
-    	}
-    	newnode->next = head;
-     	temp->next=newnode;
-    	head = newnode;  
-    	printf("\nNode inserted");  
-	}  
- 	 
-}  
-void lastinsert()  
-{  
-	struct node *newnode,*temp;  
-	int item;	 
-	newnode = (struct node*)malloc(sizeof(struct node)); 	 
-	if(newnode == NULL)  
-	{  
-    	printf("\nOVERFLOW");	 
-	}  
-	else  
-	{
-    	printf("\nEnter value:\n");  
-    	scanf("%d",&item);  
-    	newnode->data = item;  
-    	if(head == NULL)  
-    	{  
-       	 
-        	head = newnode;
-        	newnode -> next = head;  
-        	printf("\nNode inserted");  
-     	}
-    	else  
-    	{  
-        	temp = head;  
-        	while (temp -> next != head)  
-        	{  
-            	temp = temp -> next;  
-        	}  
-       	 
-        	newnode->next = head;
-        	temp->next = newnode;   
-        	printf("\nNode inserted");  
-     	 
-    	}  
-	}  
- }
-void randominsert()  
-{  
-	int i,loc,item;   
-	struct node *newnode, *temp;  
-	newnode = (struct node *) malloc (sizeof(struct node));  
-	if(newnode == NULL)  
-	{  
-    	printf("\nOVERFLOW");  
-	}  
-	else  
-	{  
-    	printf("\nEnter element value");  
-    	scanf("%d",&item);  
-    	newnode->data = item;  
-    	printf("\nEnter the location after which you want to insert ");  
-    	scanf("\n%d",&loc);  
-    	temp=head;  
-    	for(i=0;i<loc;i++)  
-    	{  
-        	temp = temp->next;  
-        	if(temp == NULL)  
-        	{  
-            	printf("\ncan't insert\n");  
-            	return;  
-        	}  
-     	 
-    	}  
-    	newnode ->next = temp ->next;   
-    	temp ->next = newnode;   
-    	printf("\nNode inserted");  
-	}  
-}  
-void begin_delete()  
-{  
-	struct node *temp;  
-	if(head == NULL)  
-	{  
-    	printf("\nList is empty\n");  
-	}
-	else if(head->next==head)
-	{
-	temp=head;
-	head=NULL;
-	free(temp);
-	}
-	else   
-	{  
-    	temp = head;  
-    	while(temp->next!=head)
-    	{
-    	temp=temp->next;
-    	}
-    	temp->next=head->next;
-    	free(head);
-     	head = temp->next;  
-    	printf("\nNode deleted from the begining ...\n");  
-	}  
-}  
-void last_delete()  
-{  
-	struct node *temp1,*temp2,*temp;  
-	if(head == NULL)  
-	{  
-    	printf("\nlist is empty");  
-	}  
-	else if(head->next==head)
-	{
-	temp=head;
-	head=NULL;
-	free(temp);
- 	printf("\nOnly node of the list deleted ...\n");
-  	}  
-	else  
-	{  
-    	temp1 = head;
-    	temp2=head;  
-    	while(temp1->next != head)  
-    	{  
-        	temp2 = temp1;  
-        	temp1 = temp1 ->next;  
-    	}  
-    	temp2->next = head;  
-    	free(temp1);  
-    	printf("\nDeleted Node from the last ...\n");  
-	}	 
-}  
-void random_delete()  
-{  
-	struct node *temp1,*temp2;  
-	int loc,i;    
-	printf("\n Enter the location of the node after which you want to perform deletion \n");  
-	scanf("%d",&loc);  
-	temp1=head;  
-	for(i=0;i<loc;i++)  
-	{  
-    	temp2 = temp1;  	 
-    	temp1 = temp1->next;  
-         	 
-    	if(temp1 == NULL)  
-    	{  
-        	printf("\nCan't delete");  
-        	return;  
-    	}  
-	}  
-	temp2 ->next = temp1 ->next;  
-	free(temp1);  
-	printf("\nDeleted node %d ",loc+1);  
-}  
-
-void display()  
-{  
-	struct node *temp;
-	int i;
-	temp = head;
-  	 
-	if(head == NULL)  
-	{  
-    	printf("Nothing to print");  
-	}  
-	else  
-	{  
-    	printf("\nprinting values . . . . .\n");   
-       	printf("\n%d",temp->data);
-    	do
-    	{  
- 	 
-    	temp = temp -> next;
-     	printf("\n%d",temp->data);	 
-    	}  while (temp->next!=head) ;
-	}  
-}	 
-           	 
+x1=x1+1;
+delay(1000);
+}
+getch();
+closegraph();
+}
+Output:
+student@complab:~$ cd /home/student/Desktop/parasss
+student@complab:~/Desktop/parasss$ gcc exp2.c -o exp2 -lgraph
+student@complab:~/Desktop/parasss$ ./exp2
+Enter co-ordinate of start point:100 10
+Enter co-ordinate of end point:400 40
 
 
 
@@ -835,332 +96,518 @@ void display()
 
 
 
+EXP.No. 3: MID POINT Circle drawing algorithm
 
-
-
-
-
-
-
-
-
-
-
-
-
-Experiment No.  9
-
-Aim : To implement the Binary Search Tree 
-
-#include <stdio.h>
-#include <stdlib.h>
- 
-// structure of a node
-struct node
+#include<stdio.h>
+#include<graphics.h>
+void main()
 {
-    int data;
-    struct node *left;
-    struct node *right;
-};
- 
-// globally initialized root pointer
-struct node *root = NULL;
- 
-// function prototyping
-struct node *create_node(int);
-void insert(int);
-struct node *delete (struct node *, int);
-int search(int);
-void inorder(struct node *);
-void postorder();
-void preorder();
-struct node *smallest_node(struct node *);
-struct node *largest_node(struct node *);
-int get_data();
- 
+int gd=DETECT,gm;
+int x,y,r,p;
+printf("Enter the radius: ");
+scanf("%d",&r);
+initgraph(&gd,&gm,NULL);
+p=1-r;
+x=0;
+y=r;
+do
+{
+putpixel(200+x,200+y,YELLOW);
+putpixel(200+y,200+x,YELLOW);
+putpixel(200-y,200+x,YELLOW);
+putpixel(200-x,200+y,YELLOW);
+putpixel(200-x,200-y,YELLOW);
+putpixel(200-y,200-x,YELLOW);
+putpixel(200+y,200-x,YELLOW);
+putpixel(200+x,200-y,YELLOW);
+if(p<0)
+{
+p=p+2*x+1;
+}
+else{
+y=y-1;
+p=p+2*(x-y)+1;
+}
+x=x+1;
+delay(1000);
+}
+while(y>x);
+getch();
+closegraph();
+}
+Output:
+student@complab:~$ cd /home/student/Desktop/parasss
+student@complab:~/Desktop/parasss$ gcc exp3.c -o exp3 -lgraph
+student@complab:~/Desktop/parasss$ ./exp3
+Enter the radius: 100
+
+
+	
+
+Exp. No. 4: Midpoint Ellipse drawing Program:
+
+#include<stdio.h>
+#include<graphics.h>
+void main()
+{
+int i,x,y,rx,ry,p1,p2,a,b,gd=DETECT,gm;
+printf("\nEnter the value of rx and ry");
+scanf("%d%d",&rx,&ry);
+initgraph(&gd,&gm,NULL);
+x=0;
+y=ry;
+p1=(ry*ry)-(rx*rx*ry)+(0.25*rx*rx);
+a=2*rx*rx*y;
+b=2*ry*ry*x;
+while(b<a)
+{
+putpixel(200+x,200+y,7);
+putpixel(200-x,200+y,7);
+putpixel(200-x,200-y,7);
+putpixel(200+x,200-y,7);
+if(p1>=0)
+{
+x=x+1;
+y=y-1;
+a=2*rx*rx*y;
+b=2*ry*ry*x;
+p1=p1+(2*ry*ry*x)-(2*rx*rx*y)+(ry*ry);
+}
+else
+{
+x=x+1;
+y=y;
+a=2*rx*rx*y;
+b=2*ry*ry*x;
+p1=p1+(2*ry*ry*x)+(ry*ry);
+}
+delay(1000);
+}
+p2=ry*ry*(x+0.5)*(x+0.5)+rx*rx*(y-1)*(y-1)-rx*rx*ry*ry
+; while(y!=0)
+{
+putpixel(200+x,200+y,7);
+putpixel(200-x,200+y,7);
+putpixel(200-x,200-y,7);
+putpixel(200+x,200-y,7);
+if(p2<=0)
+{
+x=x+1;
+y=y-1;
+p2=p2+(2*ry*ry*x)-(2*rx*rx*y)+(rx*rx);
+}
+else
+{
+x=x;
+y=y-1;
+p2=p2-(2*rx*rx*y)+(rx*rx);
+}
+delay(10);
+}
+getch();
+closegraph();
+}
+Output:
+student@complab:~$ cd /home/student/Desktop/parasss
+student@complab:~/Desktop/parasss$ gcc exp4th.c -o exp4th -lgraph
+student@complab:~/Desktop/parasss$ ./exp4th
+Enter the value of rx and ry 50 65
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+Experiment no: 5a
+a)	Boundary Fill Program:
+
+#include<stdio.h>
+#include<graphics.h>
+void flood(int x,int y,int new_col,int old_col)
+{
+if(getpixel(x,y)==old_col)
+{
+putpixel(x,y,new_col);
+delay(10);
+flood(x+1,y,new_col,old_col);
+flood(x-1,y,new_col,old_col);
+flood(x,y+1,new_col,old_col);
+flood(x,y-1,new_col,old_col);
+flood(x+1,y+1,new_col,old_col);
+flood(x+1,y-1,new_col,old_col);
+flood(x-1,y+1,new_col,old_col);
+flood(x-1,y-1,new_col,old_col);
+}
+}
 int main()
 {
-    int userChoice;
-    int userActive = 'Y';
-    int data;
-    struct node* result = NULL;
- 
-    while (userActive == 'Y' || userActive == 'y')
-    {
-        printf("\n\n------- Binary Search Tree ------\n");
-        printf("\n1. Insert");
-        printf("\n2. Delete");
-        printf("\n3. Search");
-        printf("\n4. Get Larger Node Data");
-        printf("\n5. Get smaller Node data");
-        printf("\n\n-- Traversals --");
-        printf("\n\n6. Inorder ");
-        printf("\n7. Post Order ");
-        printf("\n8. Pre Oder ");
-        printf("\n9. Exit");
- 
-        printf("\n\nEnter Your Choice: ");
-        scanf("%d", &userChoice);
-        printf("\n");
- 
-        switch(userChoice)
-        {
-            case 1:
-                data = get_data();
-                insert(data);
-                break;
- 
-            case 2:
-                data = get_data();
-                root = delete(root, data);
-                break;
- 
-            case 3:
-                data = get_data();
-                if (search(data) == 1)
-                {
-                    printf("\nData was found!\n");
-                }
-                else
-                {
-                    printf("\nData does not found!\n");
-                }
-                break;
- 
-            case 4:
-                result = largest_node(root);
-                if (result != NULL)
-                {
-                    printf("\nLargest Data: %d\n", result->data);
-                }
-                break;
- 
-            case 5:
-                result = smallest_node(root);
-                if (result != NULL)
-                {
-                    printf("\nSmallest Data: %d\n", result->data);
-                }
-                break;
- 
-            case 6:
-                inorder(root);
-                break;
- 
-            case 7:
-                postorder(root);
-                break;
- 
-            case 8:
-                preorder(root);
-                break;
- 
-            case 9:
-                printf("\n\nProgram was terminated\n");
-                break;
- 
-            default:
-                printf("\n\tInvalid Choice\n");
-                break;
-        }
- 
-//        printf("\n__________\nDo you want to continue? ");
-//        fflush(stdin);
-//        scanf(" %c", &userActive);
-    }
- 
-    return 0;
+int gd =DETECT,gm;
+initgraph(&gd,&gm,NULL);
+rectangle(50,50,200,400);
+flood(51,51,12,0);
+getch();
+return 0;
 }
- 
-// creates a new node
-struct node *create_node(int data)
+Output:
+student@complab:~$ cd /home/student/Desktop/parasss
+student@complab:~/Desktop/parasss$ gcc exp5a.c -o exp5a -lgraph
+student@complab:~/Desktop/parasss$ ./exp5a
+
+
+
+
+
+
+
+
+
+	
+
+Experiment no: 5b
+b)	Flood Fill Program
+
+#include<stdio.h>
+#include<graphics.h>
+void boundaryfill8(int x,int y,int fill_color,int boundary_color)
 {
-    struct node *new_node = (struct node *)malloc(sizeof(struct node));
- 
-    if (new_node == NULL)
-    {
-        printf("\nMemory for new node can't be allocated");
-        return NULL;
-    }
- 
-    new_node->data = data;
-    new_node->left = NULL;
-    new_node->right = NULL;
- 
-    return new_node;
-}
- 
-// inserts the data in the BST
-void insert(int data)
+if(getpixel(x,y)!=boundary_color&& getpixel(x,y)!=fill_color)
 {
-    struct node *new_node = create_node(data);
- 
-    if (new_node != NULL)
-    {
-        // if the root is empty then make a new node as the root node
-        if (root == NULL)
-        {
-            root = new_node;
-            printf("\n* node having data %d was inserted\n", data);
-            return;
-        }
- 
-        struct node *temp = root;
-        struct node *prev = NULL;
- 
-        // traverse through the BST to get the correct position for insertion
-        while (temp != NULL)
-        {
-            prev = temp;
-            if (data > temp->data)
-            {
-                temp = temp->right;
-            }
-            else
-            {
-                temp = temp->left;
-            }
-        }
- 
-        // found the last node where the new node should insert
-        if (data > prev->data)
-        {
-            prev->right = new_node;
-        }
-        else
-        {
-            prev->left = new_node;
-        }
- 
-        printf("\n* node having data %d was inserted\n", data);
-    }
+putpixel(x,y,fill_color);
+delay(10);
+boundaryfill8(x+1,y,fill_color,boundary_color);
+boundaryfill8(x,y+1,fill_color,boundary_color);
+boundaryfill8(x-1,y,fill_color,boundary_color);
+boundaryfill8(x,y-1,fill_color,boundary_color);
+boundaryfill8(x-1,y-1,fill_color,boundary_color);
+boundaryfill8(x-1,y+1,fill_color,boundary_color);
+boundaryfill8(x+1,y-1,fill_color,boundary_color);
+boundaryfill8(x+1,y+1,fill_color,boundary_color);
 }
- 
-// deletes the given key node from the BST
-struct node *delete (struct node *root, int key)
+}
+int main()
 {
-    if (root == NULL)
-    {
-        return root;
-    }
-    if (key < root->data)
-    {
-        root->left = delete (root->left, key);
-    }
-    else if (key > root->data)
-    {
-        root->right = delete (root->right, key);
-    }
-    else
-    {
-        if (root->left == NULL)
-        {
-            struct node *temp = root->right;
-            free(root);
-            return temp;
-        }
-        else if (root->right == NULL)
-        {
-            struct node *temp = root->left;
-            free(root);
-            return temp;
-        }
-        struct node *temp = smallest_node(root->right);
-        root->data = temp->data;
-        root->right = delete (root->right, temp->data);
-    }
-    return root;
- 
+int gd=DETECT, gm;
+initgraph(&gd,&gm,NULL);
+rectangle(50,50,200,400);
+boundaryfill8(51,51,4,15);
+getch();
+closegraph();
 }
- 
-// search the given key node in BST
-int search(int key)
+Output:
+student@complab:~$ cd /home/student/Desktop/parasss
+student@complab:~/Desktop/parasss$ gcc exp5b.c -o exp5b -lgraph
+student@complab:~/Desktop/parasss$ ./exp5b
+
+
+
+
+	
+
+
+
+Exp. No. 6: 2D transformations:
+a)	Translation:
+#include<stdio.h>
+#include<graphics.h>
+void main()
 {
-    struct node *temp = root;
- 
-    while (temp != NULL)
-    {
-        if (key == temp->data)
-        {
-            return 1;
-        }
-        else if (key > temp->data)
-        {
-            temp = temp->right;
-        }
-        else
-        {
-            temp = temp->left;
-        }
-    }
-    return 0;
+int x1,x2,x3,x4;
+int y1,y2,y3,y4;
+int tx,ty;
+printf("\n Enter values of x1,y1 :");
+scanf("%d %d",&x1,&y1);
+printf("\n Enter values of x2,y2 :");
+scanf("%d %d",&x2,&y2);
+printf("\n Enter values of tx,ty :");
+scanf("%d %d",&tx,&ty);
+int i,gd = DETECT, gm;
+initgraph(&gd, &gm, NULL);
+x3=x1+tx;
+y3=y1+ty;
+x4=x2+tx;
+y4=y2+ty;
+line(x1,y1,x2,y2);
+delay(100);
+line(x3,y3,x4,y4);
+getch();
+closegraph();
 }
- 
-// finds the node with the smallest value in BST
-struct node *smallest_node(struct node *root)
+
+
+
+
+
+b) Scaling:
+
+#include<stdio.h>
+#include<graphics.h>
+void main()
 {
-    struct node *curr = root;
-    while (curr != NULL && curr->left != NULL)
-   {
-        curr = curr->left;
-    }
-    return curr;
+int x1,x2,x3,x4;
+int y1,y2,y3,y4;
+int sx,sy;
+printf("\n Enter values of x1,y1 :");
+scanf("%d %d",&x1,&y1);
+printf("\n Enter values of x2,y2 :");
+scanf("%d %d",&x2,&y2);
+printf("\n Enter values of sx,sy :");
+scanf("%d %d",&sx,&sy);
+int i,gd=DETECT, gm;
+initgraph(&gd, &gm, NULL);
+x3=x1*sx;
+y3=y1*sy;
+x4=x2*sx;
+y4=y2*sy;
+line(x1,y1,x2,y2);
+delay(100);
+line(x3,y3,x4,y4);
+getch();
+closegraph();
 }
- 
-// finds the node with the largest value in BST
-struct node *largest_node(struct node *root)
+
+
+
+
+c) Rotation:
+
+#include<stdio.h>
+#include<graphics.h>
+void main ()
 {
-    struct node *curr = root;
-    while (curr != NULL && curr->right != NULL)
-    {
-        curr = curr->right;
-    }
-    return curr;
+int gd =DETECT,gm;
+int x1,x2,x3,y1,y2,y3,nx1,nx2,nx3,ny1,ny2,ny3,c;
+int r;
+float t ;
+printf("Enter the points x1,x2,x3,y1,y2,y3:");
+scanf("%d%d%d%d%d%d",&x1,&y1,&x2,&y2,&x3,&y3);
+printf("Enter the angle:");
+scanf ("%d",&r);
+initgraph(&gd,&gm,NULL);
+line(x1,y1,x2,y2);
+line(x2,y2,x3,y3);
+line(x3,y3,x1,y1);
+t=3.14*r/180;
+nx1=abs(x1*cos(t)-y1*sin(t));
+ny1=abs(x1*sin(t)+y1*cos(t));
+nx2=abs(x2*cos(t)-y2*sin(t));
+ny2=abs(x2*sin(t)+y2*cos(t));
+nx3=abs(x3*cos(t)-y3*sin(t));
+ny3=abs(x3*sin(t)+y3*cos(t));
+delay(100);
+line(nx1,ny1,nx2,ny2);
+line(nx2,ny2,nx3,ny3);
+line(nx3,ny3,nx1,ny1);
+getch();
+closegraph();
 }
- 
-// inorder traversal of the BST
-void inorder(struct node *root)
+
+
+
+
+d) Reflection:
+
+#include<stdio.h>
+#include<graphics.h>
+void main()
 {
-    if (root == NULL)
-    {
-        return;
-    }
-    inorder(root->left);
-    printf("%d ",  root->data);
-    inorder(root->right);
+int x1,y1,x2,y2;
+printf("Enter the x1 and y1 value: ");
+scanf("%d%d",&x1,&y1);
+printf("Enter the x2 and y2 value: ");
+scanf("%d%d",&x2,&y2);
+int gd = DETECT,gm;
+initgraph(&gd,&gm,NULL);
+line(200 +x1,200 +y1,200 +x2,200 +y2);
+line(200 -x1,200 +y1,200 -x2,200 +y2);
+line(200 +x1,200 -y1,200 +x2,200 -y2);
+line(200 -x1,200 -y1,200 -x2,200 -y2);
+getch();
+closegraph();
 }
- 
-// preorder traversal of the BST
-void preorder(struct node *root)
+
+
+
+
+
+
+
+Exp. No. 7:
+Animation: Bouncing Ball
+
+#include<stdio.h>
+#include<graphics.h>
+int main()
 {
-    if (root == NULL)
-    {
-        return;
-    }
-    printf("%d ", root->data);
-    preorder(root->left);
-    preorder(root->right);
-}
- 
-// postorder travsersal of the BST
-void postorder(struct node *root)
+int gd = DETECT, gm;
+int i, x, y, flag = 0;
+initgraph(&gd, &gm, NULL);
+x = 30;
+y = getmaxy() / 2;
+while(1)
 {
-    if (root == NULL)
-    {
-        return;
-    }
-    postorder(root->left);
-    postorder(root->right);
-    printf("%d ", root->data);
+if(x >= getmaxx() - 30 || x <=30)
+flag =! flag;
+setcolor(YELLOW);
+circle(x, y, 20);
+floodfill(x, y, YELLOW);
+delay(50);
+cleardevice();
+if(flag)
+x = x + 5;
+else
+x = x - 5;
 }
- 
-// getting data from the user
-int get_data()
+getch();
+closegraph();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exp. No. 8
+Cohen Sutherland Line clipping
+Aim: Write a program to implement line clipping.
+
+#include<stdio.h>
+#include<graphics.h>
+void main()
 {
-    int data;
-    printf("\nEnter Data: ");
-    scanf("%d", &data);
-    return data;
+int gd=DETECT,gm;
+int x,y,x1,y1,x2,y2,m,xmin,xmax,ymin,ymax,dx,dy;
+// xmin=50,ymin=10,xmax=80,ymax=40,x1=70,y1=20,x2=100,y2=10;
+printf("Enter x1,y1,x2,y2:");
+scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
+printf("Enter value of xmin,ymin,xmax,ymax:");
+scanf("%d%d%d%d",&xmin,&ymin,&xmax,&ymax);
+initgraph(&gd,&gm,NULL);
+rectangle(xmin,ymin,xmax,xmax);
+line(x1,y1,x2,y2);
+delay(100);
+dy=y2-y1;
+dx=x2-x1;
+m=dy/dx;
+cleardevice();
+if(x2>=xmax)
+{
+if(y2>=ymin && y2<=ymax)
+{
+x=xmax;
+y=y1+m*(xmax-x1);
+delay(100);
+rectangle(xmin,ymin,xmax,ymax);
+line(x1,y1,x,y);
+}
+}
+if(x2<=xmin)
+{
+if(y2>=ymin && y2<=ymax)
+{
+x=xmin;
+y=y1+m*(xmin-x1);
+delay(100);
+rectangle(xmin,ymin,xmax,ymax);
+line(x1,y1,x,y);
+}
+}
+if(y2>=ymax)
+{
+if(x2>=ymin && x2<=ymax)
+{
+y=ymax;
+x=x1+(ymax-y1)/m;
+delay(100);
+rectangle(xmin,ymin,xmax,ymax);
+line(x1,y1,x,y);
+}
+}
+if(y2<=ymin)
+{
+if(x2>=ymin && x2<=ymax)
+{
+y=ymin;
+x=x1+(ymin-y1)/m;
+delay(100);
+rectangle(xmin,ymin,xmax,ymax);
+line(x1,y1,x,y);
+}
+}
+getch();
+closegraph();
+}
+Output:
+student@complab:~$ cd /home/student/Desktop/TanmayChawhan_S.E.Comps-A
+student@complab:~/Desktop/TanmayChawhan_S.E.Comps-A$ gcc exp8.c -o exp8 -lgraph
+student@complab:~/Desktop/TanmayChawhan_S.E.Comps-A$ ./exp8
+Enter x1,y1,x2,y2:70
+20
+100
+10
+Enter value of xmin,ymin,xmax,ymax:50
+10
+80
+40
+
+
+
+
+
+
+
+
+
+
+
+
+Exp. No.9: Brezier curve
+
+#include<stdio.h>
+#include<graphics.h>
+int main()
+{
+int gd = DETECT,gm;
+int x[4],y[4],Px,Py,i,n;
+double t;
+printf("\n Enter Numbers of Control Points : ");
+scanf("%d",&n);
+printf("\n Enter the Control Points : ");
+for(i=0;i<n;i++)
+scanf("%d %d ",&x[i],&y[i]);
+initgraph(&gd,&gm,NULL);
+for(i=0;i<n;i++)
+putpixel(x[i],y[i],BLUE);
+for(t=0.0;t<=1.0;t += 0.001)
+{
+Px = (1-t)*(1-t)*(1-t)*x[0]+3*t*(1-t)*(1-t)*x[1]+3*t*t*(1-t)*x[2]+t*t*t*x[3];
+Py = (1-t)*(1-t)*(1-t)*y[0]+3*t*(1-t)*(1-t)*y[1]+3*t*t*(1-t)*y[2]+t*t*t*y[3];
+putpixel(Px,Py,RED);
+delay(20);
+}
+getch();
+closegraph();
 }
 
 
@@ -1177,295 +624,99 @@ int get_data()
 
 
 
+Exp.no. 10
+3D Transformation:
 
-Experiment:- 10
-Implement Graph Traversal Techniques-
+a)	Translation
 
-1)DEPTH FIRST SEARCH
-// DFS algorithm in C
+#include<stdio.h>
+#include<graphics.h>
+#include<math.h>
+void main()
+{
+int maxx, maxy,midx,midy;
+int gd = DETECT,gm;
+int tx,ty,z,o,x1,x2,y1,y2;
+printf("\n Enter Translation factor : ");
+scanf("%d %d",&tx ,&ty);
+initgraph(&gd,&gm,NULL);
+maxx = getmaxx();
+maxy = getmaxy();
+midx = maxx/2;
+midy = maxy/2;
+setcolor(RED);
+bar3d(midx+50,midy-100,midx+60,midy-90,10,1);
+delay(1000);
+bar3d(midx+tx+50,midy-(ty+100),midx+tx+60,midy-(ty+90),10,1);
+getch();
+closegraph();
 
-#include <stdio.h>
-#include <stdlib.h>
-
-struct node {
-  int vertex;
-  struct node* next;
-};
-
-struct node* createNode(int v);
-
-struct Graph {
-  int numVertices;
-  int* visited;
-
-  // We need int** to store a two dimensional array.
-  // Similary, we need struct node** to store an array of Linked lists
-  struct node** adjLists;
-};
-
-// DFS algo
-void DFS(struct Graph* graph, int vertex) {
-  struct node* adjList = graph->adjLists[vertex];
-  struct node* temp = adjList;
-
-  graph->visited[vertex] = 1;
-  printf("Visited %d \n", vertex);
-
-  while (temp != NULL) {
-    int connectedVertex = temp->vertex;
-
-    if (graph->visited[connectedVertex] == 0) {
-      DFS(graph, connectedVertex);
-    }
-    temp = temp->next;
-  }
-}
-
-// Create a node
-struct node* createNode(int v) {
-  struct node* newNode = malloc(sizeof(struct node));
-  newNode->vertex = v;
-  newNode->next = NULL;
-  return newNode;
-}
-
-// Create graph
-struct Graph* createGraph(int vertices) {
-  struct Graph* graph = malloc(sizeof(struct Graph));
-  graph->numVertices = vertices;
-
-  graph->adjLists = malloc(vertices * sizeof(struct node*));
-
-  graph->visited = malloc(vertices * sizeof(int));
-
-  int i;
-  for (i = 0; i < vertices; i++) {
-    graph->adjLists[i] = NULL;
-    graph->visited[i] = 0;
-  }
-  return graph;
-}
-
-// Add edge
-void addEdge(struct Graph* graph, int src, int dest) {
-  // Add edge from src to dest
-  struct node* newNode = createNode(dest);
-  newNode->next = graph->adjLists[src];
-  graph->adjLists[src] = newNode;
-
-  // Add edge from dest to src
-  newNode = createNode(src);
-  newNode->next = graph->adjLists[dest];
-  graph->adjLists[dest] = newNode;
-}
-
-// Print the graph
-void printGraph(struct Graph* graph) {
-  int v;
-  for (v = 0; v < graph->numVertices; v++) {
-    struct node* temp = graph->adjLists[v];
-    printf("\n Adjacency list of vertex %d\n ", v);
-    while (temp) {
-      printf("%d -> ", temp->vertex);
-      temp = temp->next;
-    }
-    printf("\n");
-  }
-}
-
-int main() {
-  struct Graph* graph = createGraph(4);
-  addEdge(graph, 0, 1);
-  addEdge(graph, 0, 2);
-  addEdge(graph, 1, 2);
-  addEdge(graph, 2, 3);
-
-  printGraph(graph);
-
-  DFS(graph, 2);
-
-  return 0;
 }
 
 
-2)BREADTH FIRST SEARCH
 
-// BFS algorithm in C
 
-#include <stdio.h>
-#include <stdlib.h>
-#define SIZE 40
 
-struct queue {
-  int items[SIZE];
-  int front;
-  int rear;
-};
 
-struct queue* createQueue();
-void enqueue(struct queue* q, int);
-int dequeue(struct queue* q);
-void display(struct queue* q);
-int isEmpty(struct queue* q);
-void printQueue(struct queue* q);
 
-struct node {
-  int vertex;
-  struct node* next;
-};
+b) Scaling:
 
-struct node* createNode(int);
 
-struct Graph {
-  int numVertices;
-  struct node** adjLists;
-  int* visited;
-};
-
-// BFS algorithm
-void bfs(struct Graph* graph, int startVertex) {
-  struct queue* q = createQueue();
-
-  graph->visited[startVertex] = 1;
-  enqueue(q, startVertex);
-
-  while (!isEmpty(q)) {
-    printQueue(q);
-    int currentVertex = dequeue(q);
-    printf("Visited %d\n", currentVertex);
-
-    struct node* temp = graph->adjLists[currentVertex];
-
-    while (temp) {
-      int adjVertex = temp->vertex;
-
-      if (graph->visited[adjVertex] == 0) {
-        graph->visited[adjVertex] = 1;
-        enqueue(q, adjVertex);
-      }
-      temp = temp->next;
-    }
-  }
+#include<stdio.h>
+#include<graphics.h>
+#include<math.h>
+void main()
+{
+int maxx, maxy,midx,midy;
+int gd = DETECT,gm;
+int sx,sy,sz,o,x1,x2,y1,y2;
+printf("\n Enter Translation factor : ");
+scanf("%d %d %d",&sx ,&sy,&sz);
+initgraph(&gd,&gm,NULL);
+maxx = getmaxx();
+maxy = getmaxy();
+midx = maxx/2;
+midy = maxy/2;
+setcolor(RED);
+bar3d(midx+50,midy-100,midx+60,midy-90,10,1);
+delay(1000);
+bar3d(midx+(sx*50),midy-(sy*100),midx+(sx*60),midy-(sy*90),5*sz,1);
+getch();
+closegraph();
 }
 
-// Creating a node
-struct node* createNode(int v) {
-  struct node* newNode = malloc(sizeof(struct node));
-  newNode->vertex = v;
-  newNode->next = NULL;
-  return newNode;
+
+
+
+
+
+
+c) Rotation:
+
+#include<stdio.h>
+#include<graphics.h>
+#include<math.h>
+void main()
+{
+int gd = DETECT,gm;
+int maxx, maxy, midx,midy;
+int tx,ty,z,o,x1,x2,y1,y2;
+printf("\n Enter Rotational factor : ");
+scanf("%d",&o);
+initgraph(&gd,&gm,NULL);
+maxx = getmaxx();
+maxy = getmaxy();
+midx = maxx/2;
+midy = maxy/2;
+setcolor(BLUE);
+x1 = 50*cos(o*3.14/180)-100*sin(o*3.14/180);
+y1 = 50*sin(o*3.14/180)+100*cos(o*3.14/180);
+x2 = 60*cos(o*3.14/180)-90*sin(o*3.14/180);
+y2 = 60*sin(o*3.14/180)+90*cos(o*3.14/180);
+bar3d(midx+50,midy-x1,midx+60,midy-x2,50,10);
+delay(100);
+bar3d(midx+x1,midy-100,midx+x2,midy-90,50,10);
+getch();
+closegraph();
 }
-
-// Creating a graph
-struct Graph* createGraph(int vertices) {
-  struct Graph* graph = malloc(sizeof(struct Graph));
-  graph->numVertices = vertices;
-
-  graph->adjLists = malloc(vertices * sizeof(struct node*));
-  graph->visited = malloc(vertices * sizeof(int));
-
-  int i;
-  for (i = 0; i < vertices; i++) {
-    graph->adjLists[i] = NULL;
-    graph->visited[i] = 0;
-  }
-
-  return graph;
-}
-
-// Add edge
-void addEdge(struct Graph* graph, int src, int dest) {
-  // Add edge from src to dest
-  struct node* newNode = createNode(dest);
-  newNode->next = graph->adjLists[src];
-  graph->adjLists[src] = newNode;
-
-  // Add edge from dest to src
-  newNode = createNode(src);
-  newNode->next = graph->adjLists[dest];
-  graph->adjLists[dest] = newNode;
-}
-
-// Create a queue
-struct queue* createQueue() {
-  struct queue* q = malloc(sizeof(struct queue));
-  q->front = -1;
-  q->rear = -1;
-  return q;
-}
-
-// Check if the queue is empty
-int isEmpty(struct queue* q) {
-  if (q->rear == -1)
-    return 1;
-  else
-    return 0;
-}
-
-// Adding elements into queue
-void enqueue(struct queue* q, int value) {
-  if (q->rear == SIZE - 1)
-    printf("\nQueue is Full!!");
-  else {
-    if (q->front == -1)
-      q->front = 0;
-    q->rear++;
-    q->items[q->rear] = value;
-  }
-}
-
-// Removing elements from queue
-int dequeue(struct queue* q) {
-  int item;
-  if (isEmpty(q)) {
-    printf("Queue is empty");
-    item = -1;
-  } else {
-    item = q->items[q->front];
-    q->front++;
-    if (q->front > q->rear) {
-      printf("Resetting queue ");
-      q->front = q->rear = -1;
-    }
-  }
-  return item;
-}
-
-// Print the queue
-void printQueue(struct queue* q) {
-  int i = q->front;
-
-  if (isEmpty(q)) {
-    printf("Queue is empty");
-  } else {
-    printf("\nQueue contains \n");
-    for (i = q->front; i < q->rear + 1; i++) {
-      printf("%d ", q->items[i]);
-    }
-  }
-}
-
-int main() {
-  struct Graph* graph = createGraph(6);
-  addEdge(graph, 0, 1);
-  addEdge(graph, 0, 2);
-  addEdge(graph, 1, 2);
-  addEdge(graph, 1, 4);
-  addEdge(graph, 1, 3);
-  addEdge(graph, 2, 4);
-  addEdge(graph, 3, 4);
-
-  bfs(graph, 0);
-
-  return 0;
-}
-
-OUTPUT:
-
-
-
-
-
-
-
 
