@@ -1,90 +1,35 @@
-Exp.No.1: DDA algorithm:
+EXPERMENT-01
+AIM: PROGRAM ON TAKING INPUT FROM USER
 
-#include<stdio.h>
-#include<graphics.h>
-void main()
+import java.util.Scanner;
+class Arms
 {
-float x,y,xinc,yinc,x1,y1,x2,y2,dx,dy,step;
-int i, gd=DETECT, gm;
-printf("Enter the value of s1 and y1:");
-scanf("%f %f",&x1,&y1);
-printf("Enter the value ofx2 and y2:");
-scanf("%f %f", &x2,&y2);
-initgraph(&gd,&gm,NULL);
-dx=abs(x2-x1);
-dy=abs(y2*y1);
-if(dx>=dy)
-step=dx;
-else
-step=dy;
-xinc=dx/step;
-yinc=dy/step;
-for(i=1;i<=step;i++)
+public static void main(String[]args)
 {
-putpixel(x,y,5);
-x=x+xinc;
-y=y+yinc;
-delay(1000);
+int temp,rem,num,sum=0;
+Scanner sc=new Scanner(System.in);
+System.out.println("enter a number;");
+num=sc.nextInt();
+temp=num;
+while(num!=0)
+{
+num=num%10;
+sum=sum+(num*num*num);
+num=num/10;
 }
-closegraph();
-}
-Output:
-student@complab:~$ cd /home/student/Desktop/parasss
-student@complab:~/Desktop/parasss$ gcc exp1.c -o exp1 -lgraph
-student@complab:~/Desktop/parasss$ ./exp1
-Enter the value of s1 and y1:600 900
-Enter the value ofx2 and y2:1000 800
-
-
-
-
-
-	
-
-
-
-
-Exp. No.2: Bresenham’s Line drawing Program
-
-#include<stdio.h>
-#include<graphics.h>
-void main()
-{
-int gd=DETECT, gm, x2,y2,x1,y1;
-int dx,dy,p,i;
-printf("Enter co-ordinate of start point:");
-scanf("%d %d",&x1,&y1);
-printf("Enter co-ordinate of end point:");
-scanf("%d %d",&x2,&y2);
-initgraph(&gd,&gm,NULL);
-dx=x2-x1;
-dy=y2-y1;
-p=2*dy-dx;
-for(i=1;i<dx;i++)
-{
-if(p>=0)
-{
-putpixel(x1,y1,7);
-y1=y1+1;
-p-p+2*dy-2*dx;
+if(temp==sum)
+{System.out.println("armstrong number");
 }
 else
 {
-putpixel(x1,y1,7);
-p=p+2*dy;
+System.out.println("not armstrong number");
 }
-x1=x1+1;
-delay(1000);
 }
-getch();
-closegraph();
 }
-Output:
-student@complab:~$ cd /home/student/Desktop/parasss
-student@complab:~/Desktop/parasss$ gcc exp2.c -o exp2 -lgraph
-student@complab:~/Desktop/parasss$ ./exp2
-Enter co-ordinate of start point:100 10
-Enter co-ordinate of end point:400 40
+OUTPUT:
+enter a number;
+78
+not armstrong number
 
 
 
@@ -96,480 +41,331 @@ Enter co-ordinate of end point:400 40
 
 
 
-EXP.No. 3: MID POINT Circle drawing algorithm
 
-#include<stdio.h>
-#include<graphics.h>
-void main()
+EXPERIMENT-2
+AIM: PROGRAM ON CLASS & OBJECT
+
+import java.util.*;
+class Box
 {
-int gd=DETECT,gm;
-int x,y,r,p;
-printf("Enter the radius: ");
-scanf("%d",&r);
-initgraph(&gd,&gm,NULL);
-p=1-r;
-x=0;
-y=r;
-do
+int length;
+int breadth;
+int height;
+}
+class Cube
 {
-putpixel(200+x,200+y,YELLOW);
-putpixel(200+y,200+x,YELLOW);
-putpixel(200-y,200+x,YELLOW);
-putpixel(200-x,200+y,YELLOW);
-putpixel(200-x,200-y,YELLOW);
-putpixel(200-y,200-x,YELLOW);
-putpixel(200+y,200-x,YELLOW);
-putpixel(200+x,200-y,YELLOW);
-if(p<0)
+int side;
+}
+class Sphere
 {
-p=p+2*x+1;
+int radius;
 }
-else{
-y=y-1;
-p=p+2*(x-y)+1;
-}
-x=x+1;
-delay(1000);
-}
-while(y>x);
-getch();
-closegraph();
-}
-Output:
-student@complab:~$ cd /home/student/Desktop/parasss
-student@complab:~/Desktop/parasss$ gcc exp3.c -o exp3 -lgraph
-student@complab:~/Desktop/parasss$ ./exp3
-Enter the radius: 100
-
-
-	
-
-Exp. No. 4: Midpoint Ellipse drawing Program:
-
-#include<stdio.h>
-#include<graphics.h>
-void main()
+class volume
 {
-int i,x,y,rx,ry,p1,p2,a,b,gd=DETECT,gm;
-printf("\nEnter the value of rx and ry");
-scanf("%d%d",&rx,&ry);
-initgraph(&gd,&gm,NULL);
-x=0;
-y=ry;
-p1=(ry*ry)-(rx*rx*ry)+(0.25*rx*rx);
-a=2*rx*rx*y;
-b=2*ry*ry*x;
-while(b<a)
+public static void main(String[]args)
 {
-putpixel(200+x,200+y,7);
-putpixel(200-x,200+y,7);
-putpixel(200-x,200-y,7);
-putpixel(200+x,200-y,7);
-if(p1>=0)
+Scanner v= new Scanner(System.in);
+Box b=new Box();
+System.out.println("enter length,breadth,height:");
+b.length=v.nextInt();
+b.breadth=v.nextInt();
+b.height=v.nextInt();
+int vob=b.length*b.breadth*b.height;
+System.out.println("volume of Box is,"+vob);
+Cube c=new Cube();
+System.out.println("enter side:");
+c.side=v.nextInt();
+int voc=c.side*c.side*c.side;
+System.out.println("volume of Cube is,"+voc);
+Sphere s=new Sphere();
+System.out.println("enter radius:");
+s.radius=v.nextInt();
+double vos=4.0/3.0*3.14*s.radius*s.radius*s.radius;
+System.out.println("volume of Sphere is,"+vos);
+}
+}
+OUTPUT:
+enter length,breadth,height:
+85 67 34
+volume of Box is,193630
+enter side:
+63
+volume of Cube is,250047
+enter radius:
+89
+volume of Sphere is,2951470.213333334
+
+
+
+
+Experiment-3A
+AIM: PROGRAM ON CONSTRUCTOR OVERLOADING
+
+import java.util.*;
+class Rect
 {
-x=x+1;
-y=y-1;
-a=2*rx*rx*y;
-b=2*ry*ry*x;
-p1=p1+(2*ry*ry*x)-(2*rx*rx*y)+(ry*ry);
-}
-else
+int length;
+int breadth;
+Rect()
 {
-x=x+1;
-y=y;
-a=2*rx*rx*y;
-b=2*ry*ry*x;
-p1=p1+(2*ry*ry*x)+(ry*ry);
+System.out.println("constructor with no parameter");
+length=breadth=0;
 }
-delay(1000);
-}
-p2=ry*ry*(x+0.5)*(x+0.5)+rx*rx*(y-1)*(y-1)-rx*rx*ry*ry
-; while(y!=0)
+Rect(int side)
 {
-putpixel(200+x,200+y,7);
-putpixel(200-x,200+y,7);
-putpixel(200-x,200-y,7);
-putpixel(200+x,200-y,7);
-if(p2<=0)
+System.out.println("constructor with one parameter");
+length=breadth=side;
+}
+Rect(int l,int b)
 {
-x=x+1;
-y=y-1;
-p2=p2+(2*ry*ry*x)-(2*rx*rx*y)+(rx*rx);
+System.out.println("constructor with two parameters");
+length=l;
+breadth=b;
 }
-else
+int display()
 {
-x=x;
-y=y-1;
-p2=p2-(2*rx*rx*y)+(rx*rx);
+return(length*breadth);
 }
-delay(10);
 }
-getch();
-closegraph();
-}
-Output:
-student@complab:~$ cd /home/student/Desktop/parasss
-student@complab:~/Desktop/parasss$ gcc exp4th.c -o exp4th -lgraph
-student@complab:~/Desktop/parasss$ ./exp4th
-Enter the value of rx and ry 50 65
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-Experiment no: 5a
-a)	Flood Fill Program:
-
-#include<stdio.h>
-#include<graphics.h>
-void flood(int x,int y,int new_col,int old_col)
+class Constructor
 {
-if(getpixel(x,y)==old_col)
+public static void main(String[]args)
 {
-putpixel(x,y,new_col);
-delay(10);
-flood(x+1,y,new_col,old_col);
-flood(x-1,y,new_col,old_col);
-flood(x,y+1,new_col,old_col);
-flood(x,y-1,new_col,old_col);
-flood(x+1,y+1,new_col,old_col);
-flood(x+1,y-1,new_col,old_col);
-flood(x-1,y+1,new_col,old_col);
-flood(x-1,y-1,new_col,old_col);
+Rect r1=new Rect();
+System.out.println("Area of the rectangle"+r1.display());
+Rect r2=new Rect(5);
+System.out.println("Area of the rectangle"+r2.display());
+Rect r3=new Rect(7,8);
+System.out.println("Area of the rectangle"+r3.display());
 }
 }
-int main()
+OUTPUT:
+constructor with no parameter
+Area of the rectangle0
+constructor with one parameter
+Area of the rectangle25
+constructor with two parameters
+Area of the rectangle56
+
+
+
+
+
+EXPERIMENT-3B
+AIM: PROGRAM ON METHOD OVERLOADING
+import java.util.*;
+class Adder
 {
-int gd =DETECT,gm;
-initgraph(&gd,&gm,NULL);
-rectangle(50,50,200,400);
-flood(51,51,12,0);
-getch();
-return 0;
-}
-Output:
-student@complab:~$ cd /home/student/Desktop/parasss
-student@complab:~/Desktop/parasss$ gcc exp5a.c -o exp5a -lgraph
-student@complab:~/Desktop/parasss$ ./exp5a
-
-
-
-
-
-
-
-
-
-	
-
-Experiment no: 5b
-b)	Boundary Fill Program
-
-#include<stdio.h>
-#include<graphics.h>
-void boundaryfill8(int x,int y,int fill_color,int boundary_color)
+void add(int a, int b)
 {
-if(getpixel(x,y)!=boundary_color&& getpixel(x,y)!=fill_color)
+int sum=a+b;
+System.out.println("sum of two integers="+sum);
+}
+void add(int a, int b, int c)
 {
-putpixel(x,y,fill_color);
-delay(10);
-boundaryfill8(x+1,y,fill_color,boundary_color);
-boundaryfill8(x,y+1,fill_color,boundary_color);
-boundaryfill8(x-1,y,fill_color,boundary_color);
-boundaryfill8(x,y-1,fill_color,boundary_color);
-boundaryfill8(x-1,y-1,fill_color,boundary_color);
-boundaryfill8(x-1,y+1,fill_color,boundary_color);
-boundaryfill8(x+1,y-1,fill_color,boundary_color);
-boundaryfill8(x+1,y+1,fill_color,boundary_color);
+int sum=a+b+c;
+System.out.println("sum of three integers="+sum);
 }
-}
-int main()
+void add(float a, float b)
 {
-int gd=DETECT, gm;
-initgraph(&gd,&gm,NULL);
-rectangle(50,50,200,400);
-boundaryfill8(51,51,4,15);
-getch();
-closegraph();
+float sum=a+b;
+System.out.println("sum of two integers="+sum);
 }
-Output:
-student@complab:~$ cd /home/student/Desktop/parasss
-student@complab:~/Desktop/parasss$ gcc exp5b.c -o exp5b -lgraph
-student@complab:~/Desktop/parasss$ ./exp5b
-
-
-
-
-	
-
-
-
-Exp. No. 6: 2D transformations:
-a)	Translation:
-#include<stdio.h>
-#include<graphics.h>
-void main()
+}
+class Methodover
 {
-int x1,x2,x3,x4;
-int y1,y2,y3,y4;
-int tx,ty;
-printf("\n Enter values of x1,y1 :");
-scanf("%d %d",&x1,&y1);
-printf("\n Enter values of x2,y2 :");
-scanf("%d %d",&x2,&y2);
-printf("\n Enter values of tx,ty :");
-scanf("%d %d",&tx,&ty);
-int i,gd = DETECT, gm;
-initgraph(&gd, &gm, NULL);
-x3=x1+tx;
-y3=y1+ty;
-x4=x2+tx;
-y4=y2+ty;
-line(x1,y1,x2,y2);
-delay(100);
-line(x3,y3,x4,y4);
-getch();
-closegraph();
-}
-
-
-
-
-
-b) Scaling:
-
-#include<stdio.h>
-#include<graphics.h>
-void main()
+public static void main(String[]args)
 {
-int x1,x2,x3,x4;
-int y1,y2,y3,y4;
-int sx,sy;
-printf("\n Enter values of x1,y1 :");
-scanf("%d %d",&x1,&y1);
-printf("\n Enter values of x2,y2 :");
-scanf("%d %d",&x2,&y2);
-printf("\n Enter values of sx,sy :");
-scanf("%d %d",&sx,&sy);
-int i,gd=DETECT, gm;
-initgraph(&gd, &gm, NULL);
-x3=x1*sx;
-y3=y1*sy;
-x4=x2*sx;
-y4=y2*sy;
-line(x1,y1,x2,y2);
-delay(100);
-line(x3,y3,x4,y4);
-getch();
-closegraph();
+Adder a1=new Adder();
+a1.add(5,6);
+a1.add(2,3,4);
+a1.add(5.6f,2.7f);
 }
+}
+OUTPUT:
+sum of two integers=11
+sum of three integers=9
+sum of two integers=8.3
 
 
 
 
-c) Rotation:
 
-#include<stdio.h>
-#include<graphics.h>
-void main ()
+
+
+
+
+EXPERIMENT-4
+AIM: PROGRAM ON PACKAGES
+PROGRAM:
+ package Arithmetic;
+public class calculate
 {
-int gd =DETECT,gm;
-int x1,x2,x3,y1,y2,y3,nx1,nx2,nx3,ny1,ny2,ny3,c;
-int r;
-float t ;
-printf("Enter the points x1,x2,x3,y1,y2,y3:");
-scanf("%d%d%d%d%d%d",&x1,&y1,&x2,&y2,&x3,&y3);
-printf("Enter the angle:");
-scanf ("%d",&r);
-initgraph(&gd,&gm,NULL);
-line(x1,y1,x2,y2);
-line(x2,y2,x3,y3);
-line(x3,y3,x1,y1);
-t=3.14*r/180;
-nx1=abs(x1*cos(t)-y1*sin(t));
-ny1=abs(x1*sin(t)+y1*cos(t));
-nx2=abs(x2*cos(t)-y2*sin(t));
-ny2=abs(x2*sin(t)+y2*cos(t));
-nx3=abs(x3*cos(t)-y3*sin(t));
-ny3=abs(x3*sin(t)+y3*cos(t));
-delay(100);
-line(nx1,ny1,nx2,ny2);
-line(nx2,ny2,nx3,ny3);
-line(nx3,ny3,nx1,ny1);
-getch();
-closegraph();
-}
-
-
-
-
-d) Reflection:
-
-#include<stdio.h>
-#include<graphics.h>
-void main()
+int a=10;
+int b=5;
+public void add()
 {
-int x1,y1,x2,y2;
-printf("Enter the x1 and y1 value: ");
-scanf("%d%d",&x1,&y1);
-printf("Enter the x2 and y2 value: ");
-scanf("%d%d",&x2,&y2);
-int gd = DETECT,gm;
-initgraph(&gd,&gm,NULL);
-line(200 +x1,200 +y1,200 +x2,200 +y2);
-line(200 -x1,200 +y1,200 -x2,200 +y2);
-line(200 +x1,200 -y1,200 +x2,200 -y2);
-line(200 -x1,200 -y1,200 -x2,200 -y2);
-getch();
-closegraph();
+int s=a+b;
+System.out.println("sum is="+s);
 }
-
-
-
-
-
-
-
-Exp. No. 7:
-Animation: Bouncing Ball
-
-#include<stdio.h>
-#include<graphics.h>
-int main()
+public void sub()
 {
-int gd = DETECT, gm;
-int i, x, y, flag = 0;
-initgraph(&gd, &gm, NULL);
-x = 30;
-y = getmaxy() / 2;
-while(1)
+int d=a-b;
+System.out.println("difference is="+d);
+}
+public void mul()
 {
-if(x >= getmaxx() - 30 || x <=30)
-flag =! flag;
-setcolor(YELLOW);
-circle(x, y, 20);
-floodfill(x, y, YELLOW);
-delay(50);
-cleardevice();
-if(flag)
-x = x + 5;
-else
-x = x - 5;
+int m=a*b;
+System.out.println("product is="+m);
 }
-getch();
-closegraph();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-Exp. No. 8
-Cohen Sutherland Line clipping
-Aim: Write a program to implement line clipping.
-
-#include<stdio.h>
-#include<graphics.h>
-void main()
+public void mod()
 {
-int gd=DETECT,gm;
-int x,y,x1,y1,x2,y2,m,xmin,xmax,ymin,ymax,dx,dy;
-// xmin=50,ymin=10,xmax=80,ymax=40,x1=70,y1=20,x2=100,y2=10;
-printf("Enter x1,y1,x2,y2:");
-scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
-printf("Enter value of xmin,ymin,xmax,ymax:");
-scanf("%d%d%d%d",&xmin,&ymin,&xmax,&ymax);
-initgraph(&gd,&gm,NULL);
-rectangle(xmin,ymin,xmax,xmax);
-line(x1,y1,x2,y2);
-delay(100);
-dy=y2-y1;
-dx=x2-x1;
-m=dy/dx;
-cleardevice();
-if(x2>=xmax)
+int o=a%b;
+System.out.println("modulus is="+o);
+}
+public void div()
 {
-if(y2>=ymin && y2<=ymax)
+int p=a/b;
+System.out.println("division is="+p);
+}
+}
+import java.util.*;
+import Arithmetic.calculate;
+class Test
 {
-x=xmax;
-y=y1+m*(xmax-x1);
-delay(100);
-rectangle(xmin,ymin,xmax,ymax);
-line(x1,y1,x,y);
-}
-}
-if(x2<=xmin)
+public static void main(String[]args)
 {
-if(y2>=ymin && y2<=ymax)
+calculate c=new calculate();
+c.add();
+c.sub();
+c.mul();
+c.mod();
+c.div();
+}
+} 
+OUTPUT:
+student@complab:~$ cd /home/student/Desktop/Bhate04
+student@complab:~/Desktop/Bhate04$ javac -d . calculate.java
+^[[Astudent@complab:~/Desktop/Bhate04$ javac Test.java
+^[[Astudent@complab:~/Desktop/Bhate04$ java Test
+sum is=15
+difference is=5
+product is=50
+modulus is=0
+division is=2
+
+
+
+
+EXPERIMENT-5A
+AIM:OPERATION ON ARRAY
+PROGRAM:
+import java.util.*;
+class Array
 {
-x=xmin;
-y=y1+m*(xmin-x1);
-delay(100);
-rectangle(xmin,ymin,xmax,ymax);
-line(x1,y1,x,y);
-}
-}
-if(y2>=ymax)
+public static void main(String args[])
 {
-if(x2>=ymin && x2<=ymax)
+Scanner sc = new Scanner(System.in);
+int i,j,k,m,n,p;
+System.out.println("Enter the number of rows for 1st matrix");
+m = sc.nextInt();
+System.out.println("Enter the number of columns for 1st matrix");
+n = sc.nextInt();
+int[][] mat1 = new int[m][n];
+System.out.println("Enter the elements of the 1st matrix") ;
+for(i=0;i<m;i++)
 {
-y=ymax;
-x=x1+(ymax-y1)/m;
-delay(100);
-rectangle(xmin,ymin,xmax,ymax);
-line(x1,y1,x,y);
-}
-}
-if(y2<=ymin)
+for(j=0;j<n;j++)
 {
-if(x2>=ymin && x2<=ymax)
+mat1[i][j] = sc.nextInt();
+}
+}
+System.out.println("Enter the number of columns for 2nd matrix");
+p = sc.nextInt();
+int [][] mat2 = new int[n][p];
+System.out.println("Enter the elements of the 2nd matrix") ;
+for(i=0;i<n;i++)
 {
-y=ymin;
-x=x1+(ymin-y1)/m;
-delay(100);
-rectangle(xmin,ymin,xmax,ymax);
-line(x1,y1,x,y);
+for(j=0;j<p;j++)
+{
+mat2[i][j] = sc.nextInt();
 }
 }
-getch();
-closegraph();
+System.out.println("The elements of matrix1 are") ;
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+{
+System.out.print(mat1[i][j]+"\t");
 }
-Output:
-student@complab:~$ cd /home/student/Desktop/TanmayChawhan_S.E.Comps-A
-student@complab:~/Desktop/TanmayChawhan_S.E.Comps-A$ gcc exp8.c -o exp8 -lgraph
-student@complab:~/Desktop/TanmayChawhan_S.E.Comps-A$ ./exp8
-Enter x1,y1,x2,y2:70
+System.out.println("");
+}
+System.out.println("The elements of matrix2 are") ;
+for(i=0;i<n;i++)
+{
+for(j=0;j<p;j++)
+{
+System.out.print(mat2[i][j]+"\t");
+}
+System.out.println("");
+}
+int mul[][] = new int [m][p];
+System.out.println("\n MULTIPLICATION of elements of matrix1 and matrix2
+are\n ") ;
+for(i=0;i<m;i++)
+{
+for(j=0;j<p;j++)
+{
+mul[i][j] = 0;
+for(k=0;k<n;k++)
+{
+mul[i][j]=mul[i][j]+mat1[i][k]*mat2[k][j];
+}
+System.out.print(mul[i][j]+"\t");
+}
+System.out.println("");
+}
+}
+}
+OUTPUT:
+Enter the number of rows for 1st matrix
+3
+Enter the number of columns for 1st matrix
+3
+Enter the elements of the 1st matrix
+23
+78
+65
+43
+70
+26
+54
 20
-100
 10
-Enter value of xmin,ymin,xmax,ymax:50
-10
-80
-40
+Enter the number of columns for 2nd matrix
+3
+Enter the elements of the 2nd matrix
+3
+29
+57
+39
+29
+51
+92
+66
+90
+The elements of matrix1 are
+23 78 65
+43 70 26
+54 20 10
+The elements of matrix2 are
+3 29 57
+39 29 51
+92 66 90
+MULTIPLICATION of elements of matrix1 and matrix2 are
+9091 7219 11139
+5251 4993 8361
+1862 2806 4998 
 
 
 
@@ -577,38 +373,36 @@ Enter value of xmin,ymin,xmax,ymax:50
 
 
 
+EXPERIMENT-5B
+AIM:OPERATION ON STRING
+PROGRAM:
 
-
-
-
-
-Exp. No.9: Brezier curve
-
-#include<stdio.h>
-#include<graphics.h>
-int main()
+import java.util.Scanner;
+class Example
 {
-int gd = DETECT,gm;
-int x[4],y[4],Px,Py,i,n;
-double t;
-printf("\n Enter Numbers of Control Points : ");
-scanf("%d",&n);
-printf("\n Enter the Control Points : ");
-for(i=0;i<n;i++)
-scanf("%d %d ",&x[i],&y[i]);
-initgraph(&gd,&gm,NULL);
-for(i=0;i<n;i++)
-putpixel(x[i],y[i],BLUE);
-for(t=0.0;t<=1.0;t += 0.001)
+public static void main(String args[])
 {
-Px = (1-t)*(1-t)*(1-t)*x[0]+3*t*(1-t)*(1-t)*x[1]+3*t*t*(1-t)*x[2]+t*t*t*x[3];
-Py = (1-t)*(1-t)*(1-t)*y[0]+3*t*(1-t)*(1-t)*y[1]+3*t*t*(1-t)*y[2]+t*t*t*y[3];
-putpixel(Px,Py,RED);
-delay(20);
+String str1="String function Example";
+String str2="Program on String";
+String lc=str1.toLowerCase();
+System.out.println("LowerCase="+lc);
+String uc=str2.toUpperCase();
+System.out.println("UpperCase="+uc);
+System.out.println("Length of String is="+str1.length());
+System.out.println("String after replacement:"+str1.replace("Example","demo"));
+System.out.println("String after concatenation:"+str1.concat(str2));
+StringBuffer obj=new StringBuffer(str2);
+obj.reverse();
+System.out.println(obj);
 }
-getch();
-closegraph();
 }
+OUTPUT:
+LowerCase=string function example
+UpperCase=PROGRAM ON STRING
+Length of String is=23
+String after replacement:String function demo
+String after concatenation:String function ExampleProgram on String
+gnirtS no margorP
 
 
 
@@ -617,106 +411,384 @@ closegraph();
 
 
 
-
-
-
-
-
-
-
-Exp.no. 10
-3D Transformation:
-
-a)	Translation
-
-#include<stdio.h>
-#include<graphics.h>
-#include<math.h>
-void main()
+EXPERIMENT-6A
+AIM: PROGRAM ON MULTILEVEL
+PROGRAM:
+import java.util.*;
+class data
 {
-int maxx, maxy,midx,midy;
-int gd = DETECT,gm;
-int tx,ty,z,o,x1,x2,y1,y2;
-printf("\n Enter Translation factor : ");
-scanf("%d %d",&tx ,&ty);
-initgraph(&gd,&gm,NULL);
-maxx = getmaxx();
-maxy = getmaxy();
-midx = maxx/2;
-midy = maxy/2;
-setcolor(RED);
-bar3d(midx+50,midy-100,midx+60,midy-90,10,1);
-delay(1000);
-bar3d(midx+tx+50,midy-(ty+100),midx+tx+60,midy-(ty+90),10,1);
-getch();
-closegraph();
-
-}
-
-
-
-
-
-
-
-b) Scaling:
-
-
-#include<stdio.h>
-#include<graphics.h>
-#include<math.h>
-void main()
+int length,breadth,height,A1,V1;
+void input(int l, int b, int h)
 {
-int maxx, maxy,midx,midy;
-int gd = DETECT,gm;
-int sx,sy,sz,o,x1,x2,y1,y2;
-printf("\n Enter Translation factor : ");
-scanf("%d %d %d",&sx ,&sy,&sz);
-initgraph(&gd,&gm,NULL);
-maxx = getmaxx();
-maxy = getmaxy();
-midx = maxx/2;
-midy = maxy/2;
-setcolor(RED);
-bar3d(midx+50,midy-100,midx+60,midy-90,10,1);
-delay(1000);
-bar3d(midx+(sx*50),midy-(sy*100),midx+(sx*60),midy-(sy*90),5*sz,1);
-getch();
-closegraph();
+length= l;
+breadth= b;
+height= h;
 }
-
-
-
-
-
-
-
-c) Rotation:
-
-#include<stdio.h>
-#include<graphics.h>
-#include<math.h>
-void main()
+}
+class Area extends data
 {
-int gd = DETECT,gm;
-int maxx, maxy, midx,midy;
-int tx,ty,z,o,x1,x2,y1,y2;
-printf("\n Enter Rotational factor : ");
-scanf("%d",&o);
-initgraph(&gd,&gm,NULL);
-maxx = getmaxx();
-maxy = getmaxy();
-midx = maxx/2;
-midy = maxy/2;
-setcolor(BLUE);
-x1 = 50*cos(o*3.14/180)-100*sin(o*3.14/180);
-y1 = 50*sin(o*3.14/180)+100*cos(o*3.14/180);
-x2 = 60*cos(o*3.14/180)-90*sin(o*3.14/180);
-y2 = 60*sin(o*3.14/180)+90*cos(o*3.14/180);
-bar3d(midx+50,midy-x1,midx+60,midy-x2,50,10);
-delay(100);
-bar3d(midx+x1,midy-100,midx+x2,midy-90,50,10);
-getch();
-closegraph();
+int calculatearea()
+{
+A1=length*breadth;
+return A1;
 }
+}
+class Volume extends Area
+{
+int calculatevolume()
+{
+V1=A1*height;
+return V1;
+}
+}
+class main
+{
+public static void main(String args[])
+{
+Volume V=new Volume();
+V.input(5,15,2);
+System.out.println("Area of rectangle-"+V.calculatearea());
+System.out.println("Volume of
+rectangle-"+V.calculatevolume()); }
+}
+OUTPUT:
+student@complab:~$ cd /home/student/Desktop/37
+student@complab:~/Desktop/37$ javac main.java
+student@complab:~/Desktop/37$ java main
+Area of rectangle-75
+Volume of rectangle-150
 
+
+
+EXPERIMENT- 6B
+AIM:PROGRAM ON HIERARCHICAL CLASS
+
+PROGRAM:
+
+import java.util.*;
+class Emp
+{
+float salary=40000;
+void dispsal()
+{
+System.out.println("Salary of emp is="+salary);
+}
+}
+class Peremp extends Emp
+{
+double hike=0.5;
+void incsal()
+{
+System.out.println("Perm.emp.increased sol is="+(salary+(salary*hike))); }
+}
+class Tempemp extends Emp
+{
+double hike=0.35;
+void incsal()
+{
+System.out.println("Temp.emp.increased.salary is="+(salary+(salary*hike))); }
+}
+public class HIDemo
+{
+public static void main(String args[])
+{
+Peremp p=new Peremp();
+Tempemp t=new Tempemp();
+p.dispsal();
+p.incsal();
+t.dispsal();
+t.incsal();
+}
+}
+OUTPUT:
+student@complab:~$ cd /home/student/Desktop/37
+student@complab:~/Desktop/37$ javac HIDemo.java
+student@complab:~/Desktop/37$ java HIDemo
+Salary of emp is=40000.0
+Perm.emp.increased sol is=60000.0
+Salary of emp is=40000.0
+Temp.emp.increased.salary is=54000.0
+
+
+
+
+
+EXPERIMENT-07
+AIM: PROGRAM ON MULTILEVEL INHERITANCE
+PROGRAM
+interface Exam
+{
+void Percent_cal();
+}
+class Student
+{
+String name;
+int roll_no, Marks1, Marks2;
+Student(String n, int rn, int m1, int m2) {
+name = n;
+roll_no = rn;
+Marks1 = m1;
+Marks2 = m2;
+}
+void show()
+{
+System.out.println("Student Name : "+name);
+System.out.println("Roll no : "+roll_no);
+System.out.println("Marks1 : "+Marks1);
+System.out.println("Marks2 : "+Marks2); }
+}
+class Result extends Student implements Exam {
+float per;
+Result(String n,int rn,int m1,int m2)
+{
+super(n,rn,m1,m2);
+}
+public void Percent_cal()
+{
+int tot = Marks1 + Marks2;
+per = (float)tot / 2;
+}
+void display()
+{
+show();
+System.out.println("Percentage = "+per);
+}
+}
+public class StudentDetails
+{
+public static void main (String[] args)
+{
+Result r = new Result("Aashish",11,75,95);
+r.Percent_cal();
+r.display();
+}
+}
+OUTPUT:
+student@complab:~$ cd /home/student/Desktop/37
+student@complab:~/Desktop/37$ javac StudentDetails.java
+student@complab:~/Desktop/37$ java StudentDetails Student
+Name : Aashish
+Roll no : 11
+Marks1 : 75
+Marks2 : 95
+Percentage = 85.0
+
+
+
+
+
+
+
+
+
+EXPERIMENT 8
+AIM: PROGRAM ON ABSTRACT CLASS AND ABSTRACT METHOD
+
+import java.util.*;
+abstract class Base
+{
+float r,l,b,h,area;
+public abstract void calculate();
+public void display()
+{
+System.out.println("Area= "+area);
+}
+}
+class circle extends Base
+{
+public void read(float x)
+{
+r=x;
+}
+public void calculate()
+{
+area=(22/7)*(r*r);
+}
+}
+class rectangle extends Base
+{
+public void read(float x,float y)
+{
+l=x;
+b=y;
+}
+public void calculate()
+{
+area=l*b;
+}
+}
+class triangle extends Base
+{
+public void read(float x,float y)
+{
+l=x;
+h=y;
+}
+public void calculate()
+{
+area=0.5f*l*h;
+}
+}
+class program
+{
+public static void main(String[]
+args) {
+float x,y;
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter the Radius:");
+x=sc.nextFloat();
+circle c=new circle();
+c.read(x);
+c.calculate();
+c.display();
+System.out.println("Enter the Length and
+Breadth:"); x=sc.nextFloat();
+y=sc.nextFloat();
+rectangle r=new rectangle();
+r.read(x,y);
+r.calculate();
+r.display();
+System.out.println("Enter Base and height:");
+x=sc.nextFloat();
+y=sc.nextFloat();
+triangle t=new triangle();
+t.read(x,y);
+t.calculate();
+t.display();
+}
+}
+OUTPUT:
+student@pc765:~$ cd /home/student/Desktop
+student@pc765:~/Desktop$ javac program.java
+student@pc765:~/Desktop$ java program
+Enter the Radius:
+4
+Area= 48.0
+Enter the Length and Breadth:
+35 68
+Area= 2380.0
+Enter Base and height:
+68 22
+Area= 748.0
+
+
+
+
+
+
+
+
+
+
+
+EXPERIMENT NO 9
+AIM: PROGRAM ON EXCEPTION HANDLING
+
+import java.util.Scanner;
+public class Exhandle1 {
+public static void main(String args[]) {
+int m[] = new int[5];
+Scanner sc = new Scanner(System.in);
+System.out.println("Enter array index");
+int a_in = sc.nextInt();
+System.out.println("Enter the no. you want to divide with");
+int in=sc.nexIn();
+try {
+System.out.println("The value at array_index is " + m[a_in] /in);
+} catch (ArithmeticException e) {
+System.out.println("Arithmetic Exception");
+System.out.println(e);
+}
+/* catch (ArrayIndexOutOfBoundsException e)
+{
+System.out.println("Array index out of bounds");
+System.out.println(e);
+} catch (Exception e) {
+System.out.println("Some other Exception");
+System.out.println(e);
+}*/
+}
+}
+OUTPUT:
+student@pc765:~$ cd /home/student/Desktop
+student@pc765:~/Desktop$ javac Exhandle1.java
+student@pc765:~/Desktop$ java Exhandle1
+Enter array index
+5
+Enter the no. you want to divide with
+0
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException:
+Index 5 out of bounds for length 5
+at Exhandle1.main(Exhandle1.java:16)
+
+
+
+
+
+
+EXPERIMENT NO:10
+AIM:Program on multithreading
+
+import java.util.*;
+class OddThread extends Thread {
+public void run() {
+for (int i = 1; i <= 50; i++) {
+if (i % 2 != 0) {
+System.out.println("Output of OddThread: " + i);
+}
+}
+}
+}
+class SquareThread extends Thread {
+public void run() {
+for (int i = 1; i <= 25; i++) {
+System.out.println("Output of SquareThread: " + (i * i));
+}
+}
+}
+public class Threading {
+public static void main(String[] args) {
+OddThread oddThread = new OddThread();
+SquareThread squareThread = new SquareThread();
+oddThread.start();
+squareThread.start();
+}
+}
+OUTPUT:
+student@complab:~/Desktop$ javac Threading.java
+student@complab:~/Desktop$ java Threading
+Output of OddThread: 1
+Output of SquareThread: 1
+Output of OddThread: 3
+Output of SquareThread: 4
+Output of OddThread: 5
+Output of OddThread: 7
+Output of OddThread: 9
+Output of OddThread: 11
+Output of OddThread: 13
+Output of SquareThread: 9
+Output of OddThread: 15
+Output of SquareThread: 16
+Output of OddThread: 17
+Output of SquareThread: 25
+Output of OddThread: 19
+Output of OddThread: 21
+Output of OddThread: 23
+Output of SquareThread: 36
+Output of OddThread: 25
+Output of SquareThread: 49
+Output of SquareThread: 64
+Output of OddThread: 27
+Output of SquareThread: 81
+Output of OddThread: 29
+Output of SquareThread: 100
+Output of OddThread: 31
+Output of SquareThread: 121
+Output of OddThread: 33
+Output of SquareThread: 144
+Output of SquareThread: 169
+Output of SquareThread: 196
+Output of SquareThread: 225
+Output of SquareThread: 256
+Output of SquareThread: 289
+Output of SquareThread: 324
